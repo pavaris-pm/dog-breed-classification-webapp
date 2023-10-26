@@ -3,7 +3,4 @@ torchensemble
 timm
 pillow
 streamlit
-os
-glob
-numpy
 torch
