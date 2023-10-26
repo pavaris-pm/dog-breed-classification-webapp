@@ -4,7 +4,7 @@
 - Classifier : ViG-CNN
 - an implementation details will be updated soon
 
-To run script
+To run script in order to open Web Application Dashboard
 ```
 git clone https://github.com/pavaris-pm/dog-breed-classification.git
 pip install requirements.txt
