@@ -3,3 +3,10 @@
 - Detector : DETR
 - Classifier : ViG-CNN
 - an implementation details will be updated soon
+
+To run script
+```
+git clone https://github.com/pavaris-pm/dog-breed-classification.git
+pip install requirements.txt
+streamlit run src/production/dashboard.py
+```
