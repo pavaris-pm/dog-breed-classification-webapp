@@ -2,3 +2,4 @@ transformers
 torchensemble
 timm
 pillow
+streamlit
