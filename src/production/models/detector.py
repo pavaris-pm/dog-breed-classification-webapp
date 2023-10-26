@@ -12,7 +12,7 @@ def load_detector_model():
     return processor, detector
 
 def detect(image: Image):
-    detector, processor = load_detector_model()
+    processor, detector = load_detector_model()
     inputs = processor(images=image, return_tensors="pt")
     outputs = detector(**inputs)
 
