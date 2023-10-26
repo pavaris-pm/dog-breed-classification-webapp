@@ -1,7 +1,7 @@
 from torch import nn
 import torch
+from PIL import Image
 import streamlit as st
-from PIL import Image, ImageOps
 from transformers import DetrImageProcessor, DetrForObjectDetection
 
 @st.cache_resource
@@ -23,7 +23,8 @@ def detect(image: Image):
 
     for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
         box = [round(i, 2) for i in box.tolist()]
+        prediction = detector.config.id2label[label.item()]
         return (
-                f"Detected {detector.config.id2label[label.item()]} with confidence "
+                f"Detected {prediction} with confidence "
                 f"{round(score.item(), 3)} at location {box}"
-        )
+        ), prediction, box
