@@ -8,7 +8,7 @@ class ConvNextTransfer(nn.Module):
   
   def __init__(self, 
                convnext_block, 
-               num_labels: int,
+               num_labels: int=133,
                ):
     
     super().__init__()
