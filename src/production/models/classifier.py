@@ -19,8 +19,11 @@ def load_classifier_model()->Tuple[AutoFeatureExtractor, AutoModelForImageClassi
 def init_model(weight_path: str)->nn.Module:
     # initilialize a model
     extractor , convnext = load_classifier_model()
+    _ , idx2label = get_total_class()
+
     conv_block = convnext.convnext
-    predictor = ConvNextTransfer(conv_block)
+    predictor = ConvNextTransfer(conv_block, 
+                                 num_labels=len(idx2label))
 
     if weight_path:
         # Load the model's state dictionary
