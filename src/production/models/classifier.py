@@ -60,6 +60,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
 
 def plot_probs_distribution(probs: torch.Tensor)->None:
 
+    _ , idx2label = get_total_class()
     # Get the top 5 maximum values and indices along dimension 1
     top_values, top_indices = torch.topk(probs, k=3, dim=1)
 
