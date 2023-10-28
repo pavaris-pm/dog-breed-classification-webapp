@@ -7,6 +7,7 @@ from PIL import Image
 import streamlit as st
 import matplotlib.pyplot as plt
 import torch
+import numpy as np
 
 
 
@@ -68,11 +69,12 @@ def plot_probs_distribution(probs: torch.Tensor)->None:
     top_values_np = top_values.squeeze().detach().numpy()
     top_indices_np = top_indices.squeeze().detach().numpy()
 
-    top_labels = [idx2label[index] for index in list(top_indices_np)]
+    top_indices_np_sort = np.sort(top_indices_np)[::-1]
+    top_labels = [idx2label[index] for index in list(top_indices_np).sort(reverse=True)]
 
     # Create the plot using Matplotlib
     fig, ax = plt.subplots()
-    ax.barh(top_labels, top_values_np, color='skyblue')
+    ax.barh(top_labels, top_values_np_sort, color='skyblue')
     ax.set_xlabel('Top Probabilities')
     ax.set_ylabel('Classes')
     ax.set_title('Top 3 Maximum Values and their Indices')
