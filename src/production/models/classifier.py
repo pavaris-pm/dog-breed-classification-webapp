@@ -40,7 +40,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
                                         str
                                         ]:
     # init this by ourselves
-    weight_file = None
+    weight_file = '/workspaces/dog-breed-classification-webapp/src/production/models/model_weights/best_model_convnext.pth'
     _ , idx2label = get_total_class()
 
     # init the model

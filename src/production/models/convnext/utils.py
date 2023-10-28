@@ -1,5 +1,6 @@
 import glob
 from typing import Tuple, Dict
+import streamlit as st
 # path checking in file directory
 # count data in each fold in each categories
 
@@ -17,6 +18,7 @@ def get_total_class()->Tuple[Dict, Dict]:
   # convert the label back
   # label2idx, idx2label
   reverse_tot_classes = {v:k for k, v in tot_classes.items()}
+  st.text(tot_classes)
   return (tot_classes, reverse_tot_classes)
 
 
