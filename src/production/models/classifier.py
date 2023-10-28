@@ -50,7 +50,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
 
     # feature extraction
     inputs = extractor(image, return_tensors="pt")
-
+    st.text(inputs)
     raw_logits = classifier(inputs.pixel_values)
     probs = torch.softmax(raw_logits, dim=1)
     st.text(probs)
