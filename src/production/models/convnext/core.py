@@ -25,6 +25,7 @@ class ConvNextTransfer(nn.Module):
     st.text(f'pooled for convnext {pooled_output}')
     # pass to classifier in order to get logits
     logits = self.classifier(pooled_output)
+    st.text(f'x for convnext {logits}')
     return logits
   
 
