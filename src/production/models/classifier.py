@@ -53,6 +53,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
 
     raw_logits = classifier(inputs.pixel_values)
     probs = torch.softmax(raw_logits, dim=1)
+    st.text(probs)
     # this will predict as a idx
     prediction = None# torch.softmax(raw_logits, dim=1).argmax(dim=1)
 
