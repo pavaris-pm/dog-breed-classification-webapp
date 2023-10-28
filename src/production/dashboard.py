@@ -1,6 +1,8 @@
 import streamlit as st
 from models.detector import detect
+from models.classifier import classify, plot_probs_distribution
 from utils import read_image, bbox_overlay
+
 
 # construct a dashboard gui
 st.title("Dog Breed Classification 🐶 🎖️")
@@ -24,9 +26,15 @@ upload_img = st.file_uploader(label='Upload Image:', type=["png", "jpg", "jpeg"]
 if upload_img:
     img = read_image(upload_img)
     txt_result, prediction, bbox = detect(img)
+    probs, _ , cls_prediction = classify(img)
     # to display text of prediction
     st.text(txt_result)
+    st.text(f'ConvNext Prediction: {cls_prediction}')
     # to overlay bounding box onto an image
+    plot_probs_distribution(probs)
     bbox_overlay(img, prediction, bbox)
+
+
+    
 
 
