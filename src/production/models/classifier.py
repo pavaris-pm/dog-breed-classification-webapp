@@ -54,9 +54,9 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
     raw_logits = classifier(inputs.pixel_values)
     probs = torch.softmax(raw_logits, dim=1)
     # this will predict as a idx
-    prediction = torch.softmax(raw_logits, dim=1).argmax(dim=1)
+    prediction = None# torch.softmax(raw_logits, dim=1).argmax(dim=1)
 
-    cls_prediction = idx2label[prediction.item()]
+    cls_prediction = None #idx2label[prediction.item()]
 
     return (probs, prediction, cls_prediction)
 
