@@ -8,7 +8,7 @@ def get_total_class()->Tuple[Dict, Dict]:
   # to return label2idx and idx2label in order to match simplt with number for preds
   c = 0
   tot_classes = {}
-  for img_path in glob.glob('/workspaces/dog-breed-classification-webapp/dog-breeds-classification/dogImages/train/*/*'):
+  for img_path in glob.glob('/dog-breed-classification-webapp/dog-breeds-classification/dogImages/train/*/*'):
     # to get breed type and remove number out from breed name
     breed_type = img_path.split('/')[-2][4:]
     if breed_type not in tot_classes.keys():

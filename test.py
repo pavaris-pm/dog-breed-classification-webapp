@@ -1,5 +1,7 @@
 import glob
+import os
 
+print(os.getcwd())
 
 c = 0
 tot_classes = {}
