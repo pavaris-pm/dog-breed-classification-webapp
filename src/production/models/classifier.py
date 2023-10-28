@@ -69,7 +69,7 @@ def plot_probs_distribution(probs: torch.Tensor)->None:
     top_values_np = top_values.squeeze().detach().numpy()
     top_indices_np = top_indices.squeeze().detach().numpy()
 
-    top_indices_np_sort = np.sort(top_indices_np)[::-1]
+    top_values_np_sort = np.sort(top_values_np)[::-1]
     top_labels = [idx2label[index] for index in list(top_indices_np).sort(reverse=True)]
 
     # Create the plot using Matplotlib
