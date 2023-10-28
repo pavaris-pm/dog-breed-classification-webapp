@@ -1,7 +1,7 @@
 from transformers import AutoFeatureExtractor, AutoModelForImageClassification  
 from typing import List, Tuple, Dict
-from models.convnext.core import ConvNextTransfer
-from models.convnext.utils import get_total_class
+from .convnext.core import ConvNextTransfer
+from .convnext.utils import get_total_class
 from torch import nn
 from PIL import Image
 import streamlit as st
