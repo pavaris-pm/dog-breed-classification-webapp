@@ -40,14 +40,13 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
                                         ]:
     # init this by ourselves
     weight_file = None
-    img = Image.open(image)
     _ , idx2label = get_total_class()
 
     # init the model
     classifier, extractor = init_model(weight_file)
 
     # feature extraction
-    inputs = extractor(img, return_tensors="pt")
+    inputs = extractor(image, return_tensors="pt")
 
     raw_logits = classifier(inputs.pixel_values)
     probs = torch.softmax(raw_logits, dim=1)
