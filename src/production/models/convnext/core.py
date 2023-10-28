@@ -1,5 +1,6 @@
 from torch import nn
 import torch
+import streamlit as st
 
 
 class ConvNextTransfer(nn.Module):
@@ -18,8 +19,10 @@ class ConvNextTransfer(nn.Module):
       
 
   def forward(self, x:torch.Tensor)->torch.Tensor:
+    st.text(f'x for convnext {x}')
     # get the output from last hidden state that already pooled -> shape: [1, 1024]
     pooled_output = self.convnext(x).pooler_output
+    st.text(f'pooled for convnext {pooled_output}')
     # pass to classifier in order to get logits
     logits = self.classifier(pooled_output)
     return logits
