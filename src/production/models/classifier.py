@@ -67,14 +67,14 @@ def plot_probs_distribution(probs: torch.Tensor)->None:
     top_values_np = top_values.squeeze().detach().numpy()
     top_indices_np = top_indices.squeeze().detach().numpy()
 
-    labels = ['a', 'b', 'c']
+    top_labels = [idx2label[index] for index in list(top_indices_np)]
 
     # Create the plot using Matplotlib
     fig, ax = plt.subplots()
-    ax.barh(labels, top_values_np, color='skyblue')
-    ax.set_xlabel('Top Values')
-    ax.set_ylabel('Indices')
-    ax.set_title('Top 5 Maximum Values and their Indices')
+    ax.barh(top_labels, top_values_np, color='skyblue')
+    ax.set_xlabel('Top Probabilities')
+    ax.set_ylabel('Classes')
+    ax.set_title('Top 3 Maximum Values and their Indices')
 
     # Display the Matplotlib plot in Streamlit
     st.pyplot(fig)
