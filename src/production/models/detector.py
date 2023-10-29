@@ -3,15 +3,16 @@ import torch
 from PIL import Image
 import streamlit as st
 from transformers import DetrImageProcessor, DetrForObjectDetection
+from typing import List, Tuple
 
 @st.cache_resource
 # to load a DETR as a detector model
-def load_detector_model():
+def load_detector_model()->Tuple[DetrImageProcessor, DetrForObjectDetection]:
     processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50", revision="no_timm")
     detector = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50", revision="no_timm")
-    return processor, detector
+    return (processor, detector)
 
-def detect(image: Image):
+def detect(image: Image)->Tuple[str, str, List]:
     processor, detector = load_detector_model()
     inputs = processor(images=image, return_tensors="pt")
     outputs = detector(**inputs)
