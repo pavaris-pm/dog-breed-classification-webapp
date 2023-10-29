@@ -1,7 +1,7 @@
 # Dog Breed Classification
-- Plan : utilizing DETR + ViG architecture with added CNN + classifier,
+- Plan : utilizing DETR + ConvNext architecture with extra optional CVAEncoder + classifier engine,
 - Detector : DETR
-- Classifier : ViG-CNN
+- Classifier : ConvNext / ConvolutionalAutoEncoder (full-architecture)
 - an implementation details will be updated soon
 
 # Web Application Demo
@@ -13,6 +13,6 @@ For Demo Web Application, You can enter it via
 To run script in order to Open Web Application Dashboard
 ```
 git clone https://github.com/pavaris-pm/dog-breed-classification.git
-pip install requirements.txt
+pip install -r requirements.txt
 streamlit run src/production/dashboard.py
 ```
