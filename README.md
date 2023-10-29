@@ -16,3 +16,24 @@ git clone https://github.com/pavaris-pm/dog-breed-classification.git
 pip install -r requirements.txt
 streamlit run src/production/dashboard.py
 ```
+
+## Citations
+
+If you use `ConvNextV2-Large-DogBreed` in your project or publication, please cite the model as follows
+
+```
+Pavaris Ruangchutiphophan. ConvNextV2-Large-DogBreed (Revision 3ddd523). Huggingface, 2023, http://doi.org/10.57967/hf/1288 
+```
+
+or BibTeX entry:
+
+```bib
+@misc {pavaris_ruangchutiphophan_2023,
+	author       = { {Pavaris Ruangchutiphophan} },
+	title        = { ConvNextV2-large-DogBreed (Revision 3ddd523) },
+	year         = 2023,
+	url          = { https://huggingface.co/Pavarissy/ConvNextV2-large-DogBreed },
+	doi          = { 10.57967/hf/1288 },
+	publisher    = { Hugging Face }
+}
+```
