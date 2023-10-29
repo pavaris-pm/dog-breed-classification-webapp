@@ -4,7 +4,7 @@
 - Classifier : ConvNext / ConvolutionalAutoEncoder (full-architecture)
 - an implementation details will be updated soon
 
-# Web Application Demo
+## Web Application Demo
 For Demo Web Application, You can enter it via 
 [dog-breed-classification website](https://oppai-dog-breed-classification.streamlit.app/)
 ![landing-page](src/production/web_image/landing_page.png)
@@ -22,7 +22,7 @@ streamlit run src/production/dashboard.py
 If you use `ConvNextV2-Large-DogBreed` in your project or publication, please cite the model as follows
 
 ```
-Pavaris Ruangchutiphophan. ConvNextV2-Large-DogBreed (Revision 3ddd523). Huggingface, 2023, http://doi.org/10.57967/hf/1288 
+Pavaris Ruangchutiphophan. ConvNextV2-large-DogBreed (Revision 3ddd523). Huggingface, 2023, http://doi.org/10.57967/hf/1288 
 ```
 
 or BibTeX entry:
