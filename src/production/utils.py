@@ -19,7 +19,8 @@ def bbox_overlay(img: Image, prediction: str, bbox: List[float])->None:
     x1, y1, x2, y2 = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
     draw.rectangle([x1, y1, x2, y2], outline=(255, 0, 0), width=5)
     
-    st.title("Image Classification by ConvNext")
+    st.title("Image Classification by ConvNextV2")
+    st.text("Upload your image, it will return location of dog in image input and their breed")
 
     # Add a smaller text as a description within the title using markdown
     st.markdown(f"### Predicted Class: {prediction}")
