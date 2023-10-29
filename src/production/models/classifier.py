@@ -1,55 +1,66 @@
-from transformers import AutoFeatureExtractor, AutoModelForImageClassification  
+from transformers import (
+    AutoFeatureExtractor, 
+    AutoModelForImageClassification,
+    AutoImageProcessor,
+    ConvNextV2ForImageClassification,
+) 
 from typing import List, Tuple, Dict
 from .convnext.core import ConvNextTransfer
-from .convnext.utils import get_total_class
 from torch import nn
 from PIL import Image
-import streamlit as st
 import matplotlib.pyplot as plt
 import torch
 import numpy as np
 
 
 
-def load_classifier_model()->Tuple[AutoFeatureExtractor, AutoModelForImageClassification]:
+def load_classifier_model(engine: str)->Tuple:
     # load convnext from huggingface hub
-    extractor = AutoFeatureExtractor.from_pretrained("facebook/convnext-base-224-22k")
-    convnext = AutoModelForImageClassification.from_pretrained("facebook/convnext-base-224-22k")
+    if engine=='convnext_v1':
+        extractor = AutoFeatureExtractor.from_pretrained("facebook/convnext-base-224-22k")
+        convnext = AutoModelForImageClassification.from_pretrained("facebook/convnext-base-224-22k")
+    elif engine=='convnext_v2':
+        # this is to test the model published in huggingface hub
+        extractor = AutoImageProcessor.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
+        convnext = ConvNextV2ForImageClassification.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
+
     return (extractor, convnext)
 
-def init_model(weight_path: str)->nn.Module:
+def init_model(engine:str='convnext_v2', weight_path: str=None)->nn.Module:
     # initilialize a model
-    extractor , convnext = load_classifier_model()
+    if engine=='convnext_v1':
+        extractor , convnext = load_classifier_model(engine)
 
-    conv_block = convnext.convnext
-    predictor = ConvNextTransfer(conv_block)
+        conv_block = convnext.convnext
+        predictor = ConvNextTransfer(conv_block)
 
-    if weight_path:
-        # Load the model's state dictionary
-        state_dict = torch.load(weight_path)
+        if weight_path:
+            # Load the model's state dictionary
+            state_dict = torch.load(weight_path)
 
-        # Load the state dictionary to the model
-        predictor.load_state_dict(state_dict)
-        return predictor, extractor
+            # Load the state dictionary to the model
+            predictor.load_state_dict(state_dict)
+            return predictor, extractor
 
-    else:
-        # in case that there has no weight to be loaded
-        return predictor, extractor
+    elif engine=='convnext_v2':
+        # in case that it is model available on huggingface
+        extractor , convnext = load_classifier_model(engine)
+        return convnext, extractor
     
 def classify(image: Image.Image)->Tuple[torch.Tensor, 
                                         torch.Tensor,
                                         str
                                         ]:
-    # init this by ourselves
-    weight_file = None#'/workspaces/dog-breed-classification-webapp/src/production/models/model_weights/best_model_convnext.pth'
-    _ , idx2label = get_total_class()
 
     # init the model
-    classifier, extractor = init_model(weight_file)
+    classifier, extractor = init_model(engine='convnext_v2')
+    
+    _ , idx2label = classifier.config.label2id, classifier.config.id2label
+
 
     # feature extraction
     inputs = extractor(image, return_tensors="pt")
-    raw_logits = classifier(inputs.pixel_values)
+    raw_logits = classifier(inputs.pixel_values).logits
     probs = torch.softmax(raw_logits, dim=1)
     # this will predict as a idx
     prediction = torch.softmax(raw_logits, dim=1).argmax(dim=1)
@@ -61,7 +72,11 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
 
 def plot_probs_distribution(probs: torch.Tensor)->plt.subplots:
 
-    _ , idx2label = get_total_class()
+    # init the model
+    classifier, _ = init_model(engine='convnext_v2')
+    
+    _ , idx2label = classifier.config.label2id, classifier.config.id2label
+
     # Get the top 5 maximum values and indices along dimension 1
     top_values, top_indices = torch.topk(probs, k=3, dim=1)
 
@@ -78,10 +93,7 @@ def plot_probs_distribution(probs: torch.Tensor)->plt.subplots:
     ax.barh(top_labels, top_values_np, color='skyblue')
     ax.set_xlabel('Top Probabilities')
     ax.set_ylabel('Classes')
-    ax.set_title('Top 3 Maximum Values and their Indices')
-
-    # Display the Matplotlib plot in Streamlit
-    st.pyplot(fig)
+    ax.set_title('Top 3 Maximum Possibilities and their Classes')
 
     return fig
             

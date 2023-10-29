@@ -28,8 +28,8 @@ if upload_img:
     txt_result, prediction, bbox = detect(img)
     probs, _ , cls_prediction = classify(img)
     # to display text of prediction
-    st.text(txt_result)
-    st.text(f'ConvNext Prediction: {cls_prediction}')
+    # st.text(txt_result) # to display confidence score and bbox
+    # st.text(f'ConvNext Prediction: {cls_prediction}')
     # to overlay bounding box onto an image
     # then pass the convnext prediction
     bbox_overlay(img, cls_prediction, bbox)

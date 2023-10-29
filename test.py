@@ -1,22 +1,20 @@
-from src.production.models.convnext.core import ConvNextTransfer
-from src.production.models.convolutional_autoencoder.core import (
-    ConvolutionalAutoencoder,
-    CAEncoderClassifier
-)
-from src.production.models.classifier import load_classifier_model, init_model
+# Load model directly
+from transformers import AutoImageProcessor, ConvNextV2ForImageClassification
 import torch
+from PIL import Image
 
-print(torch.__version__)
-# extractor, convnext = load_classifier_model()
-# test_model = ConvNextTransfer(convnext.convnext)
+# this is to test the model published in huggingface hub
+extractor = AutoImageProcessor.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
+model = ConvNextV2ForImageClassification.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
 
+# sample image
+image = Image.open('<img_file_for_test>')
 
-# test_model.load_state_dict(model_weight)
-cae = ConvolutionalAutoencoder()
-classifier = CAEncoderClassifier(8, 133, cae.encoder)
+inputs = extractor(image, return_tensors="pt")
 
-save_path = '/workspaces/dog-breed-classification-webapp/src/production/models/model_weights/'
-torch.save(classifier.state_dict(), f'{save_path}/test_weight.pth')
+with torch.no_grad():
+    logits = model(**inputs).logits
 
-classifier.load_state_dict(torch.load(f'{save_path}/test_weight.pth'))
-print("weight loaded success!")
+print(logits.shape)
+# we will get access of a class by id2label and label2id class
+print(model.config)
