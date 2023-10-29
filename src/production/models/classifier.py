@@ -41,7 +41,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
                                         str
                                         ]:
     # init this by ourselves
-    weight_file = None# '/workspaces/dog-breed-classification-webapp/src/production/models/model_weights/best_model_convnext.pth'
+    weight_file = None#'/workspaces/dog-breed-classification-webapp/src/production/models/model_weights/best_model_convnext.pth'
     _ , idx2label = get_total_class()
 
     # init the model
@@ -59,7 +59,7 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
     return (probs, prediction, cls_prediction)
 
 
-def plot_probs_distribution(probs: torch.Tensor)->None:
+def plot_probs_distribution(probs: torch.Tensor)->plt.subplots:
 
     _ , idx2label = get_total_class()
     # Get the top 5 maximum values and indices along dimension 1
@@ -69,12 +69,13 @@ def plot_probs_distribution(probs: torch.Tensor)->None:
     top_values_np = top_values.squeeze().detach().numpy()
     top_indices_np = top_indices.squeeze().detach().numpy()
 
-    top_values_np_sort = np.sort(top_values_np)[::-1]
-    top_labels = [idx2label[index] for index in list(top_indices_np).sort(reverse=True)]
+    #top_values_np_sort = np.sort(top_values_np)[::-1]
+    #top_labels = [idx2label[index] for index in list(top_indices_np).sort(reverse=True)]
+    top_labels = [idx2label[index] for index in list(top_indices_np)]
 
     # Create the plot using Matplotlib
     fig, ax = plt.subplots()
-    ax.barh(top_labels, top_values_np_sort, color='skyblue')
+    ax.barh(top_labels, top_values_np, color='skyblue')
     ax.set_xlabel('Top Probabilities')
     ax.set_ylabel('Classes')
     ax.set_title('Top 3 Maximum Values and their Indices')
@@ -82,6 +83,6 @@ def plot_probs_distribution(probs: torch.Tensor)->None:
     # Display the Matplotlib plot in Streamlit
     st.pyplot(fig)
 
-    return None
+    return fig
             
 

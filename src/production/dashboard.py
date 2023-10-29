@@ -31,8 +31,11 @@ if upload_img:
     st.text(txt_result)
     st.text(f'ConvNext Prediction: {cls_prediction}')
     # to overlay bounding box onto an image
-    plot_probs_distribution(probs)
-    bbox_overlay(img, prediction, bbox)
+    # then pass the convnext prediction
+    bbox_overlay(img, cls_prediction, bbox)
+    fig = plot_probs_distribution(probs)
+    # Display the Matplotlib plot in Streamlit
+    st.pyplot(fig)
 
 
     

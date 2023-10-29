@@ -16,10 +16,10 @@ def bbox_overlay(img: Image, prediction: str, bbox: List[float])->None:
     draw = ImageDraw.Draw(img)
 
     # get a position that object were detected
-    x, y, width, height = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
-    draw.rectangle([x, y, x + width, y + height], outline=(255, 0, 0), width=5)
+    x1, y1, x2, y2 = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
+    draw.rectangle([x1, y1, x2, y2], outline=(255, 0, 0), width=5)
     
-    st.title("Image with Bounding Boxes")
+    st.title("Image Classification by ConvNext")
 
     # Add a smaller text as a description within the title using markdown
     st.markdown(f"### Predicted Class: {prediction}")
