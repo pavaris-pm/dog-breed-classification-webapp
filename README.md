@@ -6,7 +6,8 @@
 For Demo Web Application, You can enter it via 
 [main dog-breed-classification webapp](https://oppai-dog-breed-classification-webapp-for-deployment.streamlit.app/) or [dog-breed-classification sub](https://oppai-dog-breed-classification.streamlit.app/) in case that the first url is crash
 
-![landing-page](src/production/web_image/landing_page.png)  
+![landing-page](src/production/web_image/sample_prediction)  
+![landing-page](src/production/web_image/prob_distribution) 
 
 
 To run script in order to Open Web Application Dashboard
