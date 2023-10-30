@@ -1,8 +1,18 @@
 import glob
 from typing import Tuple, Dict
+from transformers import AutoImageProcessor, ConvNextV2ForImageClassification
 # path checking in file directory
 # count data in each fold in each categories
 
+def init_model()->Tuple:
+  # this is to test the model published in huggingface hub
+  extractor = AutoImageProcessor.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
+  convnext = ConvNextV2ForImageClassification.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
+
+  return (extractor, convnext)
+
+
+# this will be utilize when we download dog breed classification dataset
 def get_total_class()->Tuple[Dict, Dict]:
   # to return label2idx and idx2label in order to match simplt with number for preds
   c = 0
