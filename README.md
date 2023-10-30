@@ -3,7 +3,7 @@
 - `Classifier` : ConvNextV2 / ConvolutionalAutoEncoder (full-architecture)
 
 ## `ConvNextV2` Proposed Component
-- `FCMAE` : Fully-Connected Masked Autoencoder
+- `FCMAE` : Fully Convolutional Masked Autoencoder
 -  `GRN` : Global Response Normalization
   
 <p align='center'>
