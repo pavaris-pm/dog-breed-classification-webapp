@@ -1,6 +1,5 @@
 from torch import nn
 import torch
-import streamlit as st
 
 
 class ConvNextTransfer(nn.Module):
