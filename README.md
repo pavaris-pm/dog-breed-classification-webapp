@@ -1,13 +1,12 @@
-# Dog Breed Classification
-- Plan : utilizing DETR + ConvNext architecture with extra optional CVAEncoder + classifier engine,
-- Detector : DETR
-- Classifier : ConvNext / ConvolutionalAutoEncoder (full-architecture)
-- an implementation details will be updated soon
+# Dog Breed Classification 🐶 🥇
+- `Detector` : DetiontionTransformer (DETR)
+- `Classifier` : ConvNextV2 / ConvolutionalAutoEncoder (full-architecture)
 
 ## Web Application Demo
 For Demo Web Application, You can enter it via 
-[dog-breed-classification website](https://oppai-dog-breed-classification.streamlit.app/)
-![landing-page](src/production/web_image/landing_page.png)
+[main dog-breed-classification webapp](https://oppai-dog-breed-classification-webapp-for-deployment.streamlit.app/) or [dog-breed-classification sub](https://oppai-dog-breed-classification.streamlit.app/) in case that the first url is crash
+
+![landing-page](src/production/web_image/landing_page.png)  
 
 
 To run script in order to Open Web Application Dashboard
