@@ -1,9 +1,9 @@
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-from .dataloader import ConvNextDogDataset
-from .core import ConvNextTransfer
-from .utils import init_model
+from dataloader import ConvNextDogDataset
+from core import ConvNextTransfer
+from utils import init_model
 from tqdm.auto import tqdm
 from torchmetrics import Accuracy
 import argparse
