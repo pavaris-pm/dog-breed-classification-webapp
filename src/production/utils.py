@@ -5,12 +5,16 @@ import glob
 
 
 # to read an image for overlaying
-def read_image(image):
+def read_image(image)->Image.Image:
     img = Image.open(image)
     return img
 
 # to overlay a bounding box to an image
-def bbox_overlay(img: Image, prediction: str, bbox: List[float])->None:
+def bbox_overlay(
+  img: Image, 
+  prediction: str, 
+  bbox: List[float]
+  )->None:
 
     # init pillow drawing object 
     draw = ImageDraw.Draw(img)

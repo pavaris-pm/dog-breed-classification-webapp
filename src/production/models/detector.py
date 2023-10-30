@@ -12,8 +12,12 @@ def load_detector_model()->Tuple[DetrImageProcessor, DetrForObjectDetection]:
     detector = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50", revision="no_timm")
     return (processor, detector)
 
-def detect(image: Image)->Tuple[str, str, List]:
-    processor, detector = load_detector_model()
+def detect(
+        image: Image,
+        processor: DetrImageProcessor,
+        detector: DetrForObjectDetection,
+    )->Tuple[str, str, List]:
+
     inputs = processor(images=image, return_tensors="pt")
     outputs = detector(**inputs)
 

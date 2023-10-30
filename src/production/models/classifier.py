@@ -11,9 +11,10 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import torch
 import numpy as np
+import streamlit as st
 
 
-
+@st.cache_resource
 def load_classifier_model(engine: str)->Tuple:
     # load convnext from huggingface hub
     if engine=='convnext_v1':
@@ -24,7 +25,7 @@ def load_classifier_model(engine: str)->Tuple:
         extractor = AutoImageProcessor.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
         convnext = ConvNextV2ForImageClassification.from_pretrained("Pavarissy/ConvNextV2-large-DogBreed")
 
-    return (extractor, convnext)
+    return (convnext, extractor)
 
 def init_model(engine:str='convnext_v2', weight_path: str=None)->nn.Module:
     # initilialize a model
@@ -47,16 +48,18 @@ def init_model(engine:str='convnext_v2', weight_path: str=None)->nn.Module:
         extractor , convnext = load_classifier_model(engine)
         return convnext, extractor
     
-def classify(image: Image.Image)->Tuple[torch.Tensor, 
-                                        torch.Tensor,
-                                        str
-                                        ]:
+def classify(
+        image: Image.Image,
+        classifier: ConvNextV2ForImageClassification,
+        extractor: AutoImageProcessor,
+    )->Tuple[
+        torch.Tensor, 
+        torch.Tensor,
+        str,
+    ]:
 
-    # init the model
-    classifier, extractor = init_model(engine='convnext_v2')
     
     _ , idx2label = classifier.config.label2id, classifier.config.id2label
-
 
     # feature extraction
     inputs = extractor(image, return_tensors="pt")
@@ -70,10 +73,10 @@ def classify(image: Image.Image)->Tuple[torch.Tensor,
     return (probs, prediction, cls_prediction)
 
 
-def plot_probs_distribution(probs: torch.Tensor)->plt.subplots:
-
-    # init the model
-    classifier, _ = init_model(engine='convnext_v2')
+def plot_probs_distribution(
+        classifier: ConvNextV2ForImageClassification,
+        probs: torch.Tensor,
+    )->plt.subplots:
     
     _ , idx2label = classifier.config.label2id, classifier.config.id2label
 
