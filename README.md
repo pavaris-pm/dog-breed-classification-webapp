@@ -2,9 +2,14 @@
 - `Detector` : DetiontionTransformer (DETR)
 - `Classifier` : ConvNextV2 / ConvolutionalAutoEncoder (full-architecture)
 
+## `ConvNextV2` Proposed Component
+- `FCMAE` : Fully-Connected Masked Autoencoder
+-  `GRN` : Global Response Normalization
+  
 <p align='center'>
-<img src="src/production/web_image/masked_autoencoder.png" width="500" alt="Masked Autoencoder">
-<img src="src/production/web_image/convnext_block.png" width="500" alt="ConvNext Block">
+<img align='auto' src="src/production/web_image/masked_autoencoder.png" width="350" alt="Masked Autoencoder">
+	
+<img align='auto' src="src/production/web_image/convnext_block.png" width="350" alt="ConvNext Block">
 </p>
 
 ## Web Application Demo
