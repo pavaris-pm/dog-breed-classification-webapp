@@ -2,12 +2,19 @@
 - `Detector` : DetiontionTransformer (DETR)
 - `Classifier` : ConvNextV2 / ConvolutionalAutoEncoder (full-architecture)
 
+<p align='center'>
+<img src="src/production/web_image/masked_autoencoder.png" width="500" alt="Masked Autoencoder">
+<img src="src/production/web_image/convnext_block.png" width="500" alt="ConvNext Block">
+</p>
+
 ## Web Application Demo
 For Demo Web Application, You can enter it via 
 [main dog-breed-classification webapp](https://oppai-dog-breed-classification-webapp-for-deployment.streamlit.app/) or [dog-breed-classification sub](https://oppai-dog-breed-classification.streamlit.app/) in case that the first url is crash
 
-![landing-page](src/production/web_image/sample_prediction)  
-![landing-page](src/production/web_image/prob_distribution) 
+<p align='center'>
+<img src="src/production/web_image/sample_prediction.png" width="500" alt="Sample Prediction">
+<img src="src/production/web_image/prob_distribution.png" width="500" alt="Probability Distribution">
+</p>p
 
 
 To run script in order to Open Web Application Dashboard
@@ -16,6 +23,11 @@ git clone https://github.com/pavaris-pm/dog-breed-classification.git
 pip install -r requirements.txt
 streamlit run src/production/dashboard.py
 ```
+## Contributors
+<a href="https://github.com/pavaris-pm/dog-breed-classification-webapp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pavaris-pm/dog-breed-classification-webapp" />
+</a>
+
 
 ## Citations
 
